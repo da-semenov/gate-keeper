@@ -8,5 +8,20 @@ services:
       - ./app.env
     volumes:
       - postgres:/var/lib/postgresql/data
+  
+  gate-keeper:
+    container_name: gate-keeper
+    image: golang:1.22.2
+    working_dir: "/home/gate-keeper/"
+    entrypoint: "go run ./cmd/gate-keeper"
+    environment:
+      RUN_ADDRESS: 0.0.0.0:8000
+      DATABASE_URI: postgresql://postgres:postgres@postgres/gate-keeper
+    volumes:
+      - ./:/home/gate-keeper
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
 volumes:
   postgres:

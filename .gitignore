@@ -23,3 +23,5 @@ logs.txt
 .idea/
 secret.md
 app.env
+tmp/
+.tmp/
