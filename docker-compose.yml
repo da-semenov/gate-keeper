@@ -1,5 +1,16 @@
 services:
+  gate-keeper:
+    build: ./
+    command: ./gate-keeper
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    env_file:
+      - ./app.env
+
   postgres:
+    restart: always
     image: postgres
     container_name: postgres
     ports:
